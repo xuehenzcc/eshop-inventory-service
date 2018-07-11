@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.zcc.inventory.mapper.ProductInventoryMapper">
+ 
+ <select id="findById" resultType="com.zcc.inventory.model.ProductInventory" >
+ 	select * 
+ 	from t_productinventory
+ 	<where>
+ 		<if test="id!=null">
+ 			id=#{id}
+ 		</if>
+ 		<if test="productId!=null">
+ 			and productId=#{productId}
+ 		</if>
+ 	</where>
+ </select>
+ 
+ <insert id="add" useGeneratedKeys="true" keyProperty="id">
+ 	INSERT INTO t_productinventory (value,productId) VALUES (#{value},#{productId})
+ </insert>
+ 
+ <update id="update">
+ 	UPDATE t_productinventory SET value=#{value},productId=#{productId} 
+ 	WHERE id=#{id}
+ </update>
+ 
+ <delete id="delete">
+ 	DELETE FROM t_productinventory 
+ 	WHERE id=#{id}
+ </delete>
+ 
+</mapper>
